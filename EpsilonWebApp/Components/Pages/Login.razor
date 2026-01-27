@@ -1,0 +1,26 @@
+@page "/login"
+ @inject HttpClient Http
+
+
+@inject IJSRuntime JS 
+
+<input @bind="username"  />
+ <input @bind="password" type="password"  />  
+<button @onclick="logon">Login</button> 
+
+@code {
+    string username = "";
+    string password = "";
+
+    private async Task logon()
+    {
+        var response = await Http.PostAsJsonAsync("api/auth/login",
+            new { Username = username, Password = password });
+
+        if (response.IsSuccessStatusCode)
+        {
+            var result = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+            await JS.InvokeVoidAsync("localStorage.setItem", "jwtToken", result!["token"]);
+        }
+    } 
+    }

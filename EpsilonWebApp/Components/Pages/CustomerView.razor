@@ -1,0 +1,138 @@
+@page "/customerview"
+@using EpsilonWebApp.Models
+
+@rendermode InteractiveServer
+@using System.Linq
+
+<div class="customer-grid">
+    @foreach (var customer in PagedCustomers)
+    {
+        <div class="customer-card">
+            <h4>@customer.CompanyName</h4>
+
+            <div><strong>Contact:</strong> @customer.ContactName</div>
+            <div><strong>City:</strong> @customer.City</div>
+            <div><strong>Country:</strong> @customer.Country</div>
+            <div><strong>Phone:</strong> @customer.Phone</div>
+        </div>
+    }
+</div>
+
+<div class="pagination">
+    <button @onclick="PrevPage" disabled="@IsFirstPage">Prev</button>
+
+    <span>
+        Page @CurrentPage of @TotalPages
+    </span>
+
+    <button @onclick="NextPage" disabled="@IsLastPage">Next</button>
+</div>
+
+@code {
+ 
+   // public List<Customer> Customers { get; set; } = new();
+
+   
+          private List<Customer> customers = new()
+    {
+        new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+           new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "fr Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "Acme Corp",
+            ContactName = "refe Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "fre Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+            new Customer
+        {
+            Id = Guid.NewGuid(),
+            CompanyName = "f Corp",
+            ContactName = "John Doe",
+            City = "New York",
+            Country = "USA",
+            Phone = "123-456"
+        },
+        // add more customers...
+    };
+
+    private int PageSize = 6;
+    private int CurrentPage = 1;
+
+    private int TotalPages =>
+        (int)Math.Ceiling(customers.Count / (double)PageSize);
+
+    private IEnumerable<Customer> PagedCustomers =>
+        customers
+            .Skip((CurrentPage - 1) * PageSize)
+            .Take(PageSize);
+
+    private bool IsFirstPage => CurrentPage == 1;
+    private bool IsLastPage => CurrentPage == TotalPages;
+
+    private void NextPage()
+    {
+        if (!IsLastPage)
+            CurrentPage++;
+    }
+
+    private void PrevPage()
+    {
+        if (!IsFirstPage)
+            CurrentPage--;
+    }
+}
