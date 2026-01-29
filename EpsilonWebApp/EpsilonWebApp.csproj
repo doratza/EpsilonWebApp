@@ -11,10 +11,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.11" /> -->
 
 
+<<<<<<< HEAD
         <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.3.9" />
 
 
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.9" />
+=======
+        <PackageReference Include="EntityFramework" Version="6.5.1" />
+>>>>>>> 096c0f504d05da7a8a80356fefbb2d3e7ee2c81b
 
 
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
