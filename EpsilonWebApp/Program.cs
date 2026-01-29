@@ -50,7 +50,8 @@ else
 
 app.UseHttpsRedirection();
 
-
+app.UseAuthentication(); // Enables authentication
+app.UseAuthorization(); 
 app.UseAntiforgery();
 
 app.MapStaticAssets();
